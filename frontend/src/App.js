@@ -39,16 +39,21 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* <Sidebar /> */}
-        {/* <div className="main-content"> */}
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Tickets />} />
+          <Route
+            path="/dashboard"
+            element={
+              <div className="main">
+                <Sidebar activeTab={"Tickets"} />
+                <Tickets />
+              </div>
+            }
+          />
           <Route path="/signup" element={<Signup />} />
           <Route path="/users" element={<Users />} />
           <Route path="/create/ticket" element={<CreateTicket />} />
         </Routes>
-        {/* </div> */}
       </BrowserRouter>
     </div>
   );
