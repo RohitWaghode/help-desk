@@ -8,11 +8,7 @@ function ticketRoutes(router, API_PREFIX) {
   );
   router.get(API_PREFIX + "/ticket/list", ticketControllers.listTicket);
 
-  router.put(
-    API_PREFIX + "/ticket/edit/:ticket_id",
-    isAdmin,
-    ticketControllers.editTicket
-  );
+  router.put(API_PREFIX + "/ticket/edit", ticketControllers.editTicket);
 
   router.delete(
     API_PREFIX + "/ticket/delete/:ticket_id",

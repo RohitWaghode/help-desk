@@ -10,6 +10,7 @@ const Tickets = () => {
   const [status, setStatus] = useState("");
   const isUser = localStorage.getItem("user_type") === "User";
   const isAgent = localStorage.getItem("user_type") === "Agent";
+  console.log("isAgent", isAgent);
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -46,17 +47,11 @@ const Tickets = () => {
     }
     try {
       const response = await axios.put(
-        `http://localhost:7000/help-desk/v1/ticket/edit/`,
+        `http://localhost:7000/help-desk/v1/ticket/edit`,
         {
-          params: {
-            ticket: selectedTicket,
-          },
-        },
-        { status },
-        {
-          headers: {
-            user_type: "Admin",
-          },
+          status,
+          user_type: localStorage.getItem("user_type"),
+          ticket_id: selectedTicket.ticket_id,
         }
       );
 
@@ -95,7 +90,7 @@ const Tickets = () => {
               <th>Status</th>
               <th>Updated At</th>
               {!isUser && <th>Edit Ticket</th>}
-              {!isUser && <th>Delete Ticket</th>}
+              {!isUser && !isAgent && <th>Delete Ticket</th>}
             </tr>
           </thead>
           <tbody>
@@ -125,7 +120,7 @@ const Tickets = () => {
                     </button>
                   </td>
                 )}
-                {!isUser && (
+                {!isUser && !isAgent && (
                   <td>
                     <button className="ticket-btn ">Delete Ticket</button>
                   </td>
@@ -136,27 +131,38 @@ const Tickets = () => {
         </table>
       </div>
 
-      <Modal isOpen={selectedTicket}>
+      <Modal isOpen={selectedTicket} className="modal">
         {selectedTicket && (
           <div className="ticket-table">
             <h3>Edit Ticket</h3>
             <div>
               <label>Status</label>
-              <select
-                value={status}
-                onChange={handleStatusChange}
-                className="select-ticket"
-              >
-                <option value="active" className="ticket-status">
-                  Active
-                </option>
-                <option value="pending">Pending</option>
-                <option value="closed">Closed</option>
-              </select>
+              <div>
+                <select
+                  value={status}
+                  onChange={handleStatusChange}
+                  className="select-ticket"
+                >
+                  <option value="active" className="ticket-status">
+                    Active
+                  </option>
+                  <option value="pending">Pending</option>
+                  <option value="closed">Closed</option>
+                </select>
+              </div>
             </div>
             <div>
-              <button onClick={editTicket}>Save Changes</button>
-              <button onClick={() => setSelectedTicket(null)}>Cancel</button>
+              <div className="modal-buttons" style={{ marginTop: 50 }}>
+                <button className="new-ticket" onClick={editTicket}>
+                  Save Changes
+                </button>
+                <button
+                  className="close-ticket"
+                  onClick={() => setSelectedTicket(null)}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         )}

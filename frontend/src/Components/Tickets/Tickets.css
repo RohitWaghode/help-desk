@@ -26,7 +26,7 @@ table .status {
   color: white;
 }
 
-table .status.open {
+table .status.active {
   background-color: blue;
 }
 

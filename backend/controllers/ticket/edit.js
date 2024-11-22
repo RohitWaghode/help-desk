@@ -1,7 +1,5 @@
 const editTicket = async (req, res) => {
-  const filter = { ticket_id: req.params.ticket_id };
-  const { status } = req.body;
-  const { user_type } = req.headers;
+  const { status, user_type, ticket_id } = req.body;
 
   if (user_type === "user") {
     res.error("You do not have permission to edit this ticket");
@@ -12,7 +10,7 @@ const editTicket = async (req, res) => {
   }
 
   try {
-    const ticket = await _models.Ticket.findOne(filter);
+    const ticket = await _models.Ticket.findOne({ ticket_id });
     if (!ticket) {
       return res.error("Ticket not found");
     }
@@ -22,7 +20,7 @@ const editTicket = async (req, res) => {
     }
 
     const update_ticket = await _models.Ticket.findOneAndUpdate(
-      filter,
+      { ticket_id },
       { status },
       { new: true }
     );
