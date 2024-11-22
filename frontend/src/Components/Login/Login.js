@@ -22,8 +22,10 @@ const Login = () => {
       );
       if (response.data && response.data.output) {
         console.log(response);
+        localStorage.setItem("user_uid", response.data.output.user_uid);
+        localStorage.setItem("user_type", response.data.output.user_type);
         alert("User Login Successfully");
-        navigate("/tickets");
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);

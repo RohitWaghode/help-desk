@@ -4,4 +4,5 @@ module.exports = {
   editUser: require("./edit"),
   deleteUser: require("./delete"),
   loginUser: require("./login"),
+  me: require("./me"),
 };

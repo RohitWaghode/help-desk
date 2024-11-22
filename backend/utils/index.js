@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const saltNumber = 15;
 
 const utils = {
-  generateUid: async function generateUid(prefix, val = 15) {
+  generateUid: async function generateUid(prefix, val = 10) {
     return `${prefix}${uuid.v4()}`.substring(0, val);
   },
   hashPassword: async function hashPassword(password) {

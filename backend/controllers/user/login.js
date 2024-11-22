@@ -36,12 +36,17 @@ const loginUser = async (req, res) => {
     );
     const valid_record = await _models.AuthToken.create({
       user_uid: isEmail?.user_uid,
+      user_type: isEmail?.user_type,
       validate_till: valid_till_date,
     });
     if (!valid_record) {
       return res.success("Invalid Auth Token");
     }
-    return res.success({ token, user_uid: isEmail?.user_uid });
+    return res.success({
+      token,
+      user_uid: isEmail?.user_uid,
+      user_type: isEmail?.user_type,
+    });
   } catch (error) {
     console.log(error);
     return res.error("Something wents wrong");

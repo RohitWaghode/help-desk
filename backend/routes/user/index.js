@@ -8,6 +8,8 @@ function userRoutes(router, API_PREFIX) {
 
   router.get(API_PREFIX + "/users/list", isAdmin, userControllers.listUser);
 
+  router.get(API_PREFIX + "/me", userControllers.me);
+
   router.put(
     API_PREFIX + "/user/edit/:user_uid",
     isAdmin,

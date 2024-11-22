@@ -3,7 +3,7 @@ const isAdmin = async (req, res, next) => {
 
   const user_exist = await _models.User.findOne({ user_uid });
 
-  if (user_exist?.user_type !== "admin") {
+  if (user_exist?.user_type !== "Admin") {
     return res.error("You can't access");
   }
 

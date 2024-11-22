@@ -40,3 +40,12 @@ table .status.pending {
 table .notes {
   text-transform: capitalize;
 }
+
+.ticket-btn {
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #04aa6d;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}

@@ -55,13 +55,21 @@ const createUser = async (req, res) => {
   try {
     const email_exist = await _models.User.findOne({ email_address });
     if (email_exist) {
-      return res.error("Email already exist ");
+      return {
+        code: "Email_Address_Error",
+        field: "email_address",
+        message: "Email Address already exist",
+      };
     }
     adminObj.email_address = email_address;
 
     const mobile_exist = await _models.User.findOne({ mobile_number });
     if (mobile_exist) {
-      return res.error("Mobile number already exist");
+      return {
+        code: "Mobile_Number_Error",
+        field: "mobile_number",
+        message: "Mobile Number already exist",
+      };
     }
     adminObj.mobile_number = mobile_number;
     adminObj.password = password;
