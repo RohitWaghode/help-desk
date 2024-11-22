@@ -11,7 +11,7 @@ const Signup = () => {
     email_address: "",
     mobile_number: "",
     password: "",
-    user_type: "",
+    user_type: "User",
   };
   const [usersData, setUsersData] = useState(initilState);
 
