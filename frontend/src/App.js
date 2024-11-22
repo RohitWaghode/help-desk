@@ -50,7 +50,7 @@ function App() {
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/create/ticket" element={<CreateTicket />} />
+          {/* <Route path="/" /> */}
         </Routes>
       </BrowserRouter>
     </div>

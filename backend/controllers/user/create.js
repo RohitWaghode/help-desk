@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
 
   const adminObj = {};
 
-  if (user_type === "admin" && req.headers?.admin_key !== "@jlfhjlglguGL#") {
+  if (user_type === "Admin" && req.headers?.admin_key !== "@jlfhjlglguGL#") {
     return res.error("INVALID_ACCESS");
   }
 
