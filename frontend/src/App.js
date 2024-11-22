@@ -1,6 +1,6 @@
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Tickets from "./Components/Tickets/Tickets";
-import Login from "./Components/Login/Login";
+import Login from "./Components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./Components/Signup/Signup";
 import CreateTicket from "./Components/Tickets/CreateTicket";
@@ -10,31 +10,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [me, setMe] = useState([]);
-  const uid = localStorage.getItem("user_uid");
-  console.log("uid", uid);
-
-  const fetchMe = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:7000/help-desk/v1/me",
-        {
-          headers: {
-            user_uid: uid,
-          },
-        }
-      );
-      if (response.data && response.data.output) {
-        setMe(response.data.output);
-        console.log("response", response.data.output);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchMe();
-  }, []);
+  const [isAddTiketVisible, setAddTicketVisible] = useState(false);
 
   return (
     <div className="App">
@@ -45,8 +21,15 @@ function App() {
             path="/dashboard"
             element={
               <div className="main">
-                <Sidebar activeTab={"Tickets"} />
+                <Sidebar
+                  activeTab={"Tickets"}
+                  setVisible={setAddTicketVisible}
+                />
                 <Tickets />
+                <CreateTicket
+                  visible={isAddTiketVisible}
+                  setVisible={setAddTicketVisible}
+                />
               </div>
             }
           />

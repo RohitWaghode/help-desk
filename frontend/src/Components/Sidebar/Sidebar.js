@@ -2,11 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
-const Sidebar = ({ activeTab }) => {
+const Sidebar = ({ activeTab, setVisible }) => {
   return (
     <div className="sidebar">
       <h3>{activeTab}</h3>
-      <button className="new-ticket">+ New ticket</button>
+      <button className="new-ticket" onClick={() => setVisible(true)}>
+        + New ticket
+      </button>
     </div>
   );
 };

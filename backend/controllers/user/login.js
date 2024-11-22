@@ -46,6 +46,7 @@ const loginUser = async (req, res) => {
       token,
       user_uid: isEmail?.user_uid,
       user_type: isEmail?.user_type,
+      customer_name: `${isEmail?.first_name} ${isEmail?.last_name}`,
     });
   } catch (error) {
     console.log(error);

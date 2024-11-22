@@ -24,6 +24,10 @@ const Login = () => {
         console.log(response);
         localStorage.setItem("user_uid", response.data.output.user_uid);
         localStorage.setItem("user_type", response.data.output.user_type);
+        localStorage.setItem(
+          "customer_name",
+          response.data.output.customer_name
+        );
         alert("User Login Successfully");
         navigate("/dashboard");
       }

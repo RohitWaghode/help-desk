@@ -9,17 +9,6 @@
   margin-bottom: 15px;
 }
 
-.new-ticket {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  margin-bottom: 15px;
-  width: 100%;
-  border-radius: 4px;
-}
-
 .menu {
   list-style: none;
   padding: 0;

@@ -7,7 +7,6 @@ const Tickets = () => {
   const [tickets, setTickets] = useState([]);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [status, setStatus] = useState("");
-  console.log("select", selectedTicket);
   useEffect(() => {
     const fetchTickets = async () => {
       try {
