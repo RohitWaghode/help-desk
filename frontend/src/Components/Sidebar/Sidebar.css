@@ -1,0 +1,32 @@
+.sidebar {
+  width: 20%;
+  background-color: #f4f4f9;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.sidebar h3 {
+  margin-bottom: 15px;
+}
+
+.new-ticket {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  margin-bottom: 10px;
+  color: #555;
+  cursor: pointer;
+}
