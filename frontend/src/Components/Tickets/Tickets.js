@@ -7,12 +7,17 @@ const Tickets = () => {
   const [tickets, setTickets] = useState([]);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [status, setStatus] = useState("");
+  const isUser = localStorage.getItem("user_type") === "user";
+
   useEffect(() => {
     const fetchTickets = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:7000/help-desk/v1/ticket/list"
+          `http://localhost:7000/help-desk/v1/ticket/list${localStorage.getItem(
+            "user_uid"
+          )}`
         );
+        console.log("response", response);
 
         if (response.data && response.data.output) {
           setTickets(response.data.output);
@@ -82,38 +87,44 @@ const Tickets = () => {
         <table>
           <thead>
             <tr>
+              <th>Sr No.</th>
               <th>Ticket ID</th>
               <th>Title</th>
-              <th>Customer Name</th>
+              {!isUser && <th>Customer Name</th>}
               <th>Status</th>
               <th>Updated At</th>
-              <th>Edit Ticket</th>
-              <th>Delete Ticket</th>
+              {!isUser && <th>Edit Ticket</th>}
+              {!isUser && <th>Delete Ticket</th>}
             </tr>
           </thead>
           <tbody>
-            {tickets.map((ticket) => (
+            {tickets.map((ticket, key) => (
               <tr key={ticket._id}>
+                <td>{key + 1}</td>
                 <td>{ticket.ticket_id}</td>
                 <td>{ticket.title}</td>
-                <td>{ticket.customer_name}</td>
+                {!isUser && <td>{ticket.customer_name}</td>}
                 <td>
                   <span className={`status ${ticket.status}`}>
                     {ticket.status}
                   </span>
                 </td>
                 <td>{new Date(ticket.updated_at).toLocaleString()}</td>
-                <td>
-                  <button
-                    className="ticket-btn "
-                    onClick={() => handleEditTicket(ticket)}
-                  >
-                    Edit Ticket
-                  </button>
-                </td>
-                <td>
-                  <button className="ticket-btn "> Delete Ticket</button>
-                </td>
+                {!isUser && (
+                  <td>
+                    <button
+                      className="ticket-btn "
+                      onClick={() => handleEditTicket(ticket)}
+                    >
+                      Edit Ticket
+                    </button>
+                  </td>
+                )}
+                {!isUser && (
+                  <td>
+                    <button className="ticket-btn ">Delete Ticket</button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

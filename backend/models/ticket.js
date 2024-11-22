@@ -5,6 +5,7 @@ const ticketSchema = new mongoose.Schema(
   {
     ticket_id: { type: String },
     title: { type: String, required: true },
+    user_uid: { type: String, required: true },
     customer_name: { type: String, required: true },
     status: {
       type: String,

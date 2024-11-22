@@ -14,6 +14,7 @@ const createTicket = async (req, res) => {
       return res.error("User not found");
     }
     const ticket = await _models.Ticket.create({
+      user_uid: req.params.user_uid,
       title,
       customer_name,
       status: "pending",
