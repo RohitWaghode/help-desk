@@ -64,7 +64,7 @@ function ViewTicket({ route }) {
           <div style={{ marginBottom: 20 }}>
             <div>{item?.notes}</div>
             <div>reply by- {item?.reply_by}</div>
-            <div>{item?.created_at}</div>
+            <div>{new Date(item?.created_at).toLocaleString()}</div>
           </div>
         ))}
 

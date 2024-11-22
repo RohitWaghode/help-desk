@@ -8,17 +8,17 @@ const Tickets = () => {
   const [tickets, setTickets] = useState([]);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [status, setStatus] = useState("");
-  const isUser = localStorage.getItem("user_type") === "user";
+  const isUser = localStorage.getItem("user_type") === "User";
+  const isAgent = localStorage.getItem("user_type") === "Agent";
 
   useEffect(() => {
     const fetchTickets = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:7000/help-desk/v1/ticket/list${localStorage.getItem(
-            "user_uid"
-          )}`
+          `http://localhost:7000/help-desk/v1/ticket/list?user_uid=${
+            isUser ? localStorage.getItem("user_uid") : ""
+          }`
         );
-        console.log("response", response);
 
         if (response.data && response.data.output) {
           setTickets(response.data.output);

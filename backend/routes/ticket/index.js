@@ -6,10 +6,7 @@ function ticketRoutes(router, API_PREFIX) {
     API_PREFIX + "/ticket/create/:user_uid",
     ticketControllers.createTicket
   );
-  router.get(
-    API_PREFIX + "/ticket/list:user_uid",
-    ticketControllers.listTicket
-  );
+  router.get(API_PREFIX + "/ticket/list", ticketControllers.listTicket);
 
   router.put(
     API_PREFIX + "/ticket/edit/:ticket_id",
