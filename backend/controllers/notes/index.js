@@ -3,4 +3,5 @@ module.exports = {
   listNotes: require("./list"),
   editNotes: require("./edit"),
   deleteNotes: require("./delete"),
+  replyNotes: require("./reply"),
 };

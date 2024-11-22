@@ -1,6 +1,5 @@
 const listTicket = async (req, res) => {
   const { user_uid } = req.params;
-  console.log("req.params");
   try {
     const result = await _models.Ticket.find(
       user_uid ? { user_uid: user_uid } : {}

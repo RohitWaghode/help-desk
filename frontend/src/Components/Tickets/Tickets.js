@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Tickets.css";
 import Modal from "react-modal";
+import { Link } from "react-router-dom";
 
 const Tickets = () => {
   const [tickets, setTickets] = useState([]);
@@ -101,7 +102,11 @@ const Tickets = () => {
             {tickets.map((ticket, key) => (
               <tr key={ticket._id}>
                 <td>{key + 1}</td>
-                <td>{ticket.ticket_id}</td>
+                <td>
+                  <Link to={`/ticket/${ticket.ticket_id}`}>
+                    {ticket.ticket_id}
+                  </Link>
+                </td>
                 <td>{ticket.title}</td>
                 {!isUser && <td>{ticket.customer_name}</td>}
                 <td>

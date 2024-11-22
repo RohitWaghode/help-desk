@@ -5,7 +5,7 @@ const notesSchema = new mongoose.Schema(
     ticket_id: { type: String },
     user_uid: { type: String },
     notes: { type: String, required: true },
-    // reply_by: { type: Map, of: String, default: {} },
+    reply_by: { type: String }, // user, agent, admin
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
