@@ -15,6 +15,11 @@ function ticketRoutes(router, API_PREFIX) {
     isAdmin,
     ticketControllers.deleteTicket
   );
+
+  router.get(
+    API_PREFIX + "/ticket/get-file/:filename",
+    ticketControllers.getFile
+  );
 }
 
 module.exports = ticketRoutes;

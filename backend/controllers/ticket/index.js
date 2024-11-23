@@ -3,4 +3,5 @@ module.exports = {
   listTicket: require("./list"),
   editTicket: require("./edit"),
   deleteTicket: require("./delete"),
+  getFile: require("./get-file"),
 };

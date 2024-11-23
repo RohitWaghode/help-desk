@@ -67,6 +67,16 @@ function ViewTicket({ route }) {
             <div>{item?.notes}</div>
             <div>reply by- {item?.reply_by}</div>
             <div>{new Date(item?.created_at).toLocaleString()}</div>
+            <div
+              onClick={() =>
+                window.open(
+                  `http://localhost:7000/backend/${item?.attchement}`,
+                  "_blank"
+                )
+              }
+            >
+              View Attachement
+            </div>
           </div>
         ))}
 
