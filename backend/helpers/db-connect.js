@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const models = require("../models");
 
 module.exports = function initConnection() {
-  mongoose.connect("mongodb://localhost:27017/help-desk_database");
+  mongoose.connect(
+    "mongodb+srv://rohitwaghode67:nhQisAjOohzpxtdF@help-desk-web-database.kpgzr.mongodb.net/?retryWrites=true&w=majority&appName=help-desk-web-database"
+  );
   let database = mongoose.connection;
   database.on("error", function (err) {
     console.log("Failed to connect database", err);
