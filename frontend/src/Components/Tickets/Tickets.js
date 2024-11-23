@@ -11,6 +11,7 @@ const Tickets = () => {
   const isUser = localStorage.getItem("user_type") === "User";
   const isAgent = localStorage.getItem("user_type") === "Agent";
   console.log("isAgent", isAgent);
+  const adminKey = "@jlfhjlglguGL#";
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -76,6 +77,28 @@ const Tickets = () => {
     }
   };
 
+  const onDelete = async (ticket_id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:7000/help-desk/v1/ticket/delete/${ticket_id}`,
+        {
+          headers: {
+            user_uid: localStorage.getItem("user_uid"),
+          },
+        }
+      );
+
+      if (response.data.output) {
+        alert("Deleted ");
+      } else {
+        alert("Failed to delete ticket: ");
+      }
+    } catch (err) {
+      console.error("Error editing ticket:", err);
+      alert("An error occurred while updating the ticket.");
+    }
+  };
+
   return (
     <div className="ticket-table">
       <h3>All Tickets</h3>
@@ -122,7 +145,12 @@ const Tickets = () => {
                 )}
                 {!isUser && !isAgent && (
                   <td>
-                    <button className="ticket-btn ">Delete Ticket</button>
+                    <button
+                      className="ticket-btn"
+                      onClick={() => onDelete(ticket.ticket_id)}
+                    >
+                      Delete Ticket
+                    </button>
                   </td>
                 )}
               </tr>
