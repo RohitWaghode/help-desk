@@ -74,7 +74,20 @@ function App() {
             }
           />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/users" element={<Users />} />
+          <Route
+            path="/users"
+            element={
+              <div className="main">
+                <Sidebar
+                  activeTab={"Tickets"}
+                  setVisible={setAddTicketVisible}
+                  showAddTicket={true}
+                  onBack={true}
+                />
+                <Users />
+              </div>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

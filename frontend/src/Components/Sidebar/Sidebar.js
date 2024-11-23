@@ -12,6 +12,11 @@ const Sidebar = ({ activeTab, setVisible, showAddTicket, onBack }) => {
       <h3 onClick={onBack ? () => navigation("/dashboard") : () => {}}>
         {activeTab}
       </h3>
+      {isAdmin && (
+        <h3 onClick={onBack ? () => navigation("/users") : () => {}}>
+          Users list
+        </h3>
+      )}
       {isUser && showAddTicket && (
         <button className="new-ticket" onClick={() => setVisible(true)}>
           + New ticket
