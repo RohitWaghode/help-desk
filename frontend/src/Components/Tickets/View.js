@@ -8,11 +8,11 @@ function ViewTicket({ route }) {
   const initialData = {
     reply_list: [],
     reply: "",
+    file: "",
   };
 
   const [formData, setFormData] = useState(initialData);
-  console.log("formData", formData);
-  const { reply_list, reply } = formData;
+  const { reply_list, reply, file } = formData;
 
   useEffect(() => {
     fetchTickets();
@@ -34,14 +34,16 @@ function ViewTicket({ route }) {
   };
 
   const addReply = async () => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("user_uid", localStorage.getItem("user_uid"));
+    formData.append("notes", reply);
+    formData.append("reply_by", localStorage.getItem("user_type"));
+
     try {
       const response = await axios.post(
         `http://localhost:7000/help-desk/v1/notes/reply/${ticket_uid}`,
-        {
-          user_uid: localStorage.getItem("user_uid"),
-          notes: reply,
-          reply_by: localStorage.getItem("user_type"),
-        }
+        formData
       );
 
       if (response.data && response.data.output) {
@@ -79,6 +81,10 @@ function ViewTicket({ route }) {
           className="input"
         />
       </div>
+      <input
+        type="file"
+        onChange={(e) => setFormData({ ...formData, file: e.target.files[0] })}
+      />
       <button className="new-ticket" onClick={addReply}>
         Add Reply
       </button>
