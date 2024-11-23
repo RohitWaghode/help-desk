@@ -12,12 +12,36 @@ import ViewTicket from "./Components/Tickets/View";
 
 function App() {
   const [isAddTiketVisible, setAddTicketVisible] = useState(false);
+  const isUserExist = localStorage.getItem("user_type");
+  const isAdmin = localStorage.getItem("user_type") === "Admin";
 
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route
+            path="*"
+            exact={true}
+            element={
+              isUserExist ? (
+                <div className="main">
+                  <Sidebar
+                    activeTab={"Tickets"}
+                    setVisible={setAddTicketVisible}
+                    showAddTicket={true}
+                    onBack={true}
+                  />
+                  <Tickets />
+                  <CreateTicket
+                    visible={isAddTiketVisible}
+                    setVisible={setAddTicketVisible}
+                  />
+                </div>
+              ) : (
+                <Login />
+              )
+            }
+          />
           <Route
             path="/dashboard"
             element={
@@ -26,6 +50,7 @@ function App() {
                   activeTab={"Tickets"}
                   setVisible={setAddTicketVisible}
                   showAddTicket={true}
+                  onBack={true}
                 />
                 <Tickets />
                 <CreateTicket
@@ -50,7 +75,6 @@ function App() {
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/users" element={<Users />} />
-          {/* <Route path="/" /> */}
         </Routes>
       </BrowserRouter>
     </div>

@@ -5,8 +5,7 @@ import "./Sidebar.css";
 const Sidebar = ({ activeTab, setVisible, showAddTicket, onBack }) => {
   const navigation = useNavigate();
   const isUser = localStorage.getItem("user_type") === "User";
-  const isAdmin = localStorage.getItem("user_type");
-  console.log("isAdmin", isAdmin);
+  const isAdmin = localStorage.getItem("user_type") === "Admin";
 
   return (
     <div className="sidebar">
