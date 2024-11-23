@@ -4,7 +4,8 @@ const listUser = async (req, res) => {
     return res.success(result);
   } catch (error) {
     console.log(error);
-    return res.error("Something went wrong");
+
+    return res.error("Something went wrong", error);
   }
 };
 
