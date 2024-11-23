@@ -21,9 +21,9 @@ const CreateTicket = ({ visible, setVisible }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:7000/help-desk/v1/ticket/create/${localStorage.getItem(
-          "user_uid"
-        )}`,
+        `${
+          import.meta.env.BACKEND_BASE_URL
+        }/ticket/create/${localStorage.getItem("user_uid")}`,
         { title: ticket.title, customer_name: _custmomer_name }
       );
 

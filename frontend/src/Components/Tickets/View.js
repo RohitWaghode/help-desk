@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function ViewTicket({ route }) {
   const { ticket_uid } = useParams();
@@ -21,7 +21,7 @@ function ViewTicket({ route }) {
   const fetchTickets = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:7000/help-desk/v1/notes/list${ticket_uid}`
+        `${import.meta.env.BACKEND_BASE_URL}/notes/list${ticket_uid}`
       );
       console.log("response", response);
 
@@ -42,7 +42,7 @@ function ViewTicket({ route }) {
 
     try {
       const response = await axios.post(
-        `http://localhost:7000/help-desk/v1/notes/reply/${ticket_uid}`,
+        `${import.meta.env.BACKEND_BASE_URL}/notes/reply/${ticket_uid}`,
         formData
       );
 
@@ -59,7 +59,7 @@ function ViewTicket({ route }) {
     const parts = fileName.split("\\");
     try {
       const response = await axios.get(
-        `http://localhost:7000/help-desk/v1/ticket/get-file/${parts[1]}`,
+        `${import.meta.env.BACKEND_BASE_URL}/ticket/get-file/${parts[1]}`,
         {
           responseType: "blob",
         }

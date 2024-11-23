@@ -26,7 +26,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:7000/help-desk/v1/user/create",
+        `${import.meta.env.BACKEND_BASE_URL}/user/create`,
         usersData,
         {
           headers: {

@@ -10,14 +10,12 @@ const Tickets = () => {
   const [status, setStatus] = useState("");
   const isUser = localStorage.getItem("user_type") === "User";
   const isAgent = localStorage.getItem("user_type") === "Agent";
-  console.log("isAgent", isAgent);
-  const adminKey = "@jlfhjlglguGL#";
 
   useEffect(() => {
     const fetchTickets = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:7000/help-desk/v1/ticket/list?user_uid=${
+          `${import.meta.env.BACKEND_BASE_URL}/ticket/list?user_uid=${
             isUser ? localStorage.getItem("user_uid") : ""
           }`
         );
@@ -48,7 +46,7 @@ const Tickets = () => {
     }
     try {
       const response = await axios.put(
-        `http://localhost:7000/help-desk/v1/ticket/edit`,
+        `${import.meta.env.BACKEND_BASE_URL}/ticket/edit`,
         {
           status,
           user_type: localStorage.getItem("user_type"),
@@ -80,7 +78,7 @@ const Tickets = () => {
   const onDelete = async (ticket_id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:7000/help-desk/v1/ticket/delete/${ticket_id}`,
+        `${import.meta.env.BACKEND_BASE_URL}/ticket/delete/${ticket_id}`,
         {
           headers: {
             user_uid: localStorage.getItem("user_uid"),

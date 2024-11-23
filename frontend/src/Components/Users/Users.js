@@ -7,7 +7,7 @@ const Users = () => {
   const fetchUser = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:7000/help-desk/v1/users/list"
+        `${import.meta.env.BACKEND_BASE_URL}/users/list`
       );
       if (response.data && response.data.output) {
         setUsers(response.data.output);

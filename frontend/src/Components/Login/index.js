@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:7000/help-desk/v1/user/login",
+        `${import.meta.env.BACKEND_BASE_URL}/user/login`,
         loginData
       );
       if (response.data && response.data.output) {
