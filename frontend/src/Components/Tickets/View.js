@@ -54,6 +54,31 @@ function ViewTicket({ route }) {
     }
   };
 
+  const onDownload = async (fileName) => {
+    console.log("fileName", fileName);
+    const parts = fileName.split("\\");
+    try {
+      const response = await axios.get(
+        `http://localhost:7000/help-desk/v1/ticket/get-file/${parts[1]}`,
+        {
+          responseType: "blob",
+        }
+      );
+
+      const link = document.createElement("a");
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      link.href = url;
+      console.log("url", url);
+      link.setAttribute("download", "test.png");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Error fetching tickets:", err);
+    }
+  };
+
   return (
     <div className="ticket-table">
       <h4>Reply/Notes</h4>
@@ -67,14 +92,7 @@ function ViewTicket({ route }) {
             <div>{item?.notes}</div>
             <div>reply by- {item?.reply_by}</div>
             <div>{new Date(item?.created_at).toLocaleString()}</div>
-            <div
-              onClick={() =>
-                window.open(
-                  `http://localhost:7000/backend/${item?.attchement}`,
-                  "_blank"
-                )
-              }
-            >
+            <div onClick={() => onDownload(item?.attchement)}>
               View Attachement
             </div>
           </div>
