@@ -6,7 +6,11 @@ function userRoutes(router, API_PREFIX) {
 
   router.post(API_PREFIX + "/user/login", userControllers.loginUser);
 
-  router.get(API_PREFIX + "/users/list", isAdmin, userControllers.listUser);
+  router.get(
+    API_PREFIX + "/users/list",
+    //  isAdmin,
+    userControllers.listUser
+  );
 
   router.get(API_PREFIX + "/me", userControllers.me);
 

@@ -26,7 +26,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.BACKEND_BASE_URL}/user/create`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/user/create`,
         usersData,
         {
           headers: {

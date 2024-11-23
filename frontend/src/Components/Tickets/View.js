@@ -21,7 +21,7 @@ function ViewTicket({ route }) {
   const fetchTickets = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.BACKEND_BASE_URL}/notes/list${ticket_uid}`
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/notes/list${ticket_uid}`
       );
       console.log("response", response);
 
@@ -42,7 +42,7 @@ function ViewTicket({ route }) {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.BACKEND_BASE_URL}/notes/reply/${ticket_uid}`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/notes/reply/${ticket_uid}`,
         formData
       );
 
@@ -59,7 +59,7 @@ function ViewTicket({ route }) {
     const parts = fileName.split("\\");
     try {
       const response = await axios.get(
-        `${import.meta.env.BACKEND_BASE_URL}/ticket/get-file/${parts[1]}`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/ticket/get-file/${parts[1]}`,
         {
           responseType: "blob",
         }

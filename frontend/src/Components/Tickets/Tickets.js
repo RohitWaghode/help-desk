@@ -15,7 +15,7 @@ const Tickets = () => {
     const fetchTickets = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.BACKEND_BASE_URL}/ticket/list?user_uid=${
+          `${process.env.REACT_APP_BACKEND_BASE_URL}/ticket/list?user_uid=${
             isUser ? localStorage.getItem("user_uid") : ""
           }`
         );
@@ -46,7 +46,7 @@ const Tickets = () => {
     }
     try {
       const response = await axios.put(
-        `${import.meta.env.BACKEND_BASE_URL}/ticket/edit`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/ticket/edit`,
         {
           status,
           user_type: localStorage.getItem("user_type"),
@@ -78,7 +78,7 @@ const Tickets = () => {
   const onDelete = async (ticket_id) => {
     try {
       const response = await axios.delete(
-        `${import.meta.env.BACKEND_BASE_URL}/ticket/delete/${ticket_id}`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/ticket/delete/${ticket_id}`,
         {
           headers: {
             user_uid: localStorage.getItem("user_uid"),
