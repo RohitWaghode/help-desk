@@ -21,6 +21,7 @@ const replyNotes = async (req, res) => {
       user_uid,
       reply_by,
       notes,
+      attchement: req.file.path,
     });
     return res.success(result);
   } catch (err) {
