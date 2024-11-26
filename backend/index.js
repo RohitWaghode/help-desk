@@ -11,9 +11,11 @@ const PORT = config.PORT || 7000;
 
 app.use(
   cors({
-    origin: "https://your-frontend-domain.com", // cors
+    origin: "https://help-desk-li7l.vercel.app", // cors
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   })
 );
 app.use(bodyParser.json());
