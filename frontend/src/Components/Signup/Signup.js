@@ -26,7 +26,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        `https://help-desk-flax-omega.vercel.app/help-desk/v1/user/create`,
+        `${process.env.REACT_APP_BACKEND_BASE_URL}/user/create`,
         usersData,
         {
           headers: {
@@ -40,7 +40,7 @@ const Signup = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log("Error Response:", error.response.data?.error);
+      console.log("Error Response:", error.response.error);
     }
   };
   return (
