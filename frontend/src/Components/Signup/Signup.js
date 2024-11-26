@@ -42,7 +42,7 @@ const Signup = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log("Error in form submission:");
+      console.log("Error in form submission:", error);
     }
   };
 
