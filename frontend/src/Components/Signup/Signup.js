@@ -35,14 +35,15 @@ const Signup = () => {
         }
       );
       console.log("response", response);
-      console.log(process.env.REACT_APP_BACKEND_BASE_URL);
+      console.log("process", process.env.REACT_APP_BACKEND_BASE_URL);
       if (response.data && response.data.output) {
         alert("User Created Successfully");
         setUsersData(initilState);
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      console.log("first");
+      console.log(error.response);
     }
   };
   return (
