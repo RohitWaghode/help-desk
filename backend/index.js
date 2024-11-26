@@ -9,15 +9,7 @@ const getRoutes = require("./routes");
 const config = path.resolve(__dirname, "env", "local.json");
 const PORT = config.PORT || 7000;
 
-app.use(
-  cors({
-    origin: "https://help-desk-li7l.vercel.app", // cors
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", "admin_key"],
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  })
-);
+app.use(cors());
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   res = wrapResponse(req, res);

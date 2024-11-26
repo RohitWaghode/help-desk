@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const initialState = {
+  const initilState = {
     first_name: "",
     last_name: "",
     email_address: "",
@@ -13,8 +13,7 @@ const Signup = () => {
     password: "",
     user_type: "User",
   };
-  const [usersData, setUsersData] = useState(initialState);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [usersData, setUsersData] = useState(initilState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,47 +23,26 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const adminKey = "@jlfhjlglguGL#";
-    const headers = {};
-
-    if (usersData.user_type === "Admin") {
-      headers.admin_key = adminKey;
-    }
-
-    console.log("Submitting user data:", usersData);
 
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/user/create`,
         usersData,
-        { headers }
+        {
+          headers: {
+            admin_key: adminKey,
+          },
+        }
       );
-
-      console.log("Response from backend:", response);
-      if (
-        response.data &&
-        response.data.message === "User created successfully"
-      ) {
+      console.log("response", response);
+      console.log("process", process.env.REACT_APP_BACKEND_BASE_URL);
+      if (response.data && response.data.output) {
         alert("User Created Successfully");
-        setUsersData(initialState);
+        setUsersData(initilState);
         navigate("/");
       }
     } catch (error) {
       console.log("Error in form submission:");
-      if (error.response) {
-        console.log("Error Response Data:", error.response.data);
-        console.log("Error Response Status:", error.response.status);
-        console.log("Error Response Headers:", error.response.headers);
-
-        setErrorMessage(error.response.data.message || "Something went wrong.");
-      } else if (error.request) {
-        console.log("No response received:", error.request);
-        setErrorMessage(
-          "No response received from the server. Please try again later."
-        );
-      } else {
-        console.log("Error Message:", error.message);
-        setErrorMessage(`Request error: ${error.message}`);
-      }
     }
   };
 
@@ -74,7 +52,7 @@ const Signup = () => {
         <h1>Create an Account</h1>
       </div>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="first_name">First Name</label>
+        <label htmlFor="firstlast">First Name</label>
         <input
           type="text"
           name="first_name"
@@ -114,7 +92,7 @@ const Signup = () => {
           required
         />
 
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password"> Password</label>
         <input
           type="password"
           name="password"
@@ -135,7 +113,6 @@ const Signup = () => {
           <option>Agent</option>
           <option>Admin</option>
         </select>
-
         <button type="submit" className="login-btn">
           Sign Up
         </button>
@@ -145,7 +122,6 @@ const Signup = () => {
           </p>
         </div>
       </form>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   );
 };
