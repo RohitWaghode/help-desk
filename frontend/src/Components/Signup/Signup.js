@@ -34,6 +34,8 @@ const Signup = () => {
           },
         }
       );
+      console.log("response", response);
+      console.log(process.env.REACT_APP_BACKEND_BASE_URL);
       if (response.data && response.data.output) {
         alert("User Created Successfully");
         setUsersData(initilState);
