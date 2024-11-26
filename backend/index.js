@@ -13,7 +13,7 @@ app.use(
   cors({
     origin: "https://help-desk-li7l.vercel.app", // cors
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "admin_key"],
     preflightContinue: false,
     optionsSuccessStatus: 204,
   })
