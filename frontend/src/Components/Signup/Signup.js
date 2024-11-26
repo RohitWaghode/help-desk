@@ -40,7 +40,7 @@ const Signup = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log(data?.error);
+      console.log("Error Response:", error.response.data?.error);
     }
   };
   return (
