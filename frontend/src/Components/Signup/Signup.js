@@ -81,7 +81,7 @@ const Signup = () => {
 
         <label htmlFor="mobile_number">Mobile Number</label>
         <input
-          type="text"
+          type="number"
           name="mobile_number"
           placeholder="Enter your mobile number"
           value={usersData.mobile_number}

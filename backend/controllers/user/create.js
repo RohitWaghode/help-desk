@@ -1,4 +1,6 @@
 const createUser = async (req, res) => {
+  const mobileRegex = /^\d{10}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const {
     first_name,
     last_name,
@@ -21,17 +23,15 @@ const createUser = async (req, res) => {
       message: "Last Name is required",
     };
   } else if (!email_address) {
-    return {
-      code: "Email_Address_Error",
-      field: "email_address",
-      message: "Email Address is required",
-    };
+    if (!email_address) {
+      return "Email Address is required";
+    } else if (!emailRegex.test(email_address)) {
+      return "Invalid Email Address";
+    }
   } else if (!mobile_number) {
-    return {
-      code: "Mobile_Number_Error",
-      field: "mobile_number",
-      message: "Mobile Number is required",
-    };
+    return "Mobile Number is required";
+  } else if (!mobileRegex.test(mobile_number)) {
+    return "Invalid Mobile Number";
   } else if (!password) {
     return {
       code: "Password_Error",
