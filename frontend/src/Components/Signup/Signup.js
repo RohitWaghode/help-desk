@@ -42,10 +42,24 @@ const Signup = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log("first");
-      console.log(error.response);
+      console.log("Error in form submission:");
+      if (error.response) {
+        console.log("Error Response Data:", error.response.data);
+        console.log("Error Response Status:", error.response.status);
+        console.log("Error Response Headers:", error.response.headers);
+        alert(
+          `Error: ${error.response.data.message || "Something went wrong."}`
+        );
+      } else if (error.request) {
+        console.log("No response received:", error.request);
+        alert("No response received from the server. Please try again later.");
+      } else {
+        console.log("Error Message:", error.message);
+        alert(`Request error: ${error.message}`);
+      }
     }
   };
+
   return (
     <div className="login-container">
       <div className="login-header">
