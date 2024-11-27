@@ -11,7 +11,7 @@ const PORT = config.PORT || 7000;
 
 app.use(
   cors({
-    origin: ["https://help-desk-li7l.vercel.app/"],
+    origin: ["https://help-desk-li7l.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
