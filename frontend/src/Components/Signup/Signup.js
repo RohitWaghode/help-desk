@@ -32,6 +32,7 @@ const Signup = () => {
           headers: {
             admin_key: adminKey,
           },
+          credentials: "include",
         }
       );
       if (response.data && response.data.output) {
