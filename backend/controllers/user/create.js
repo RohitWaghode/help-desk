@@ -82,7 +82,11 @@ const createUser = async (req, res) => {
     return res.success(user);
   } catch (error) {
     console.log(error);
-    return res.error("error", error);
+    return {
+      code: "SERVER_ERROR",
+      message: "Something went wrong, please try again later",
+      error: error.message,
+    };
   }
 };
 

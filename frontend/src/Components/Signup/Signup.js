@@ -22,7 +22,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const adminKey = "@jlfhjlglguGL#";
+    // const adminKey = "@jlfhjlglguGL#";
 
     try {
       const response = await axios.post(
@@ -30,7 +30,7 @@ const Signup = () => {
         usersData,
         {
           headers: {
-            admin_key: adminKey,
+            admin_key: formData.user_type === "Admin" ? "@jlfhjlglguGL#" : "",
           },
         }
       );
@@ -42,7 +42,7 @@ const Signup = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log("Error", error);
+      console.log("error", error.response?.data?.message || error.message);
     }
   };
 
