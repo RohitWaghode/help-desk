@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,29 +15,43 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post(
+      const response = await fetch(
         `https://help-desk-flax-omega.vercel.app/help-desk/v1/user/login`,
-        loginData
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(loginData),
+        }
       );
-      if (response.data && response.data.output) {
+
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+
+      const data = await response.json();
+
+      if (data && data.output) {
         console.log(response);
-        localStorage.setItem("user_uid", response.data.output.user_uid);
-        localStorage.setItem("user_type", response.data.output.user_type);
-        localStorage.setItem(
-          "customer_name",
-          response.data.output.customer_name
-        );
+        localStorage.setItem("user_uid", data.output.user_uid);
+        localStorage.setItem("user_type", data.output.user_type);
+        localStorage.setItem("customer_name", data.output.customer_name);
         alert("User Login Successfully");
         navigate("/dashboard");
+      } else {
+        throw new Error("Invalid response structure");
       }
     } catch (error) {
-      console.log("error in login", error);
+      console.log("Error in login:", error);
+      alert("Login failed. Please try again.");
     }
   };
+
   return (
     <div className="login-container">
       <div className="login-header">
-        <h3 className="title">Help-Desk App </h3>
+        <h3 className="title">Help-Desk App</h3>
         <h2>Welcome Back</h2>
       </div>
       <form className="login-form" onSubmit={handleSubmit}>
@@ -65,7 +78,7 @@ const Login = () => {
         </button>
         <div className="signup">
           <p>
-            Don't have a account<Link to={"/signup"}>Sign Up</Link>
+            Don't have an account? <Link to={"/signup"}>Sign Up</Link>
           </p>
         </div>
       </form>
