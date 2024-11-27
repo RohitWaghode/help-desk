@@ -32,7 +32,7 @@ const Login = () => {
         navigate("/dashboard");
       }
     } catch (error) {
-      console.log(error);
+      console.log("error in login");
     }
   };
   return (
