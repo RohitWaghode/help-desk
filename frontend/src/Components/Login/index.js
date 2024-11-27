@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_BASE_URL}/user/login`,
+        `https://help-desk-flax-omega.vercel.app/help-desk/v1/user/login`,
         loginData
       );
       if (response.data && response.data.output) {
