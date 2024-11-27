@@ -22,7 +22,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const adminKey = "@jlfhjlglguGL#";
+    const adminKey = "@jlfhjlglguGL#";
 
     try {
       const response = await axios.post(
@@ -30,23 +30,19 @@ const Signup = () => {
         usersData,
         {
           headers: {
-            admin_key: formData.user_type === "Admin" ? "@jlfhjlglguGL#" : "",
+            admin_key: adminKey,
           },
         }
       );
-      console.log("response", response);
-      console.log("process", process.env.REACT_APP_BACKEND_BASE_URL);
       if (response.data && response.data.output) {
         alert("User Created Successfully");
         setUsersData(initilState);
         navigate("/");
       }
     } catch (error) {
-      console.log("error", error.response?.data?.message || error.message);
-      alert("Error: " + (error.response?.data?.message || error.message));
+      console.log(error);
     }
   };
-
   return (
     <div className="login-container">
       <div className="login-header">
