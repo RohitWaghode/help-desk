@@ -36,8 +36,6 @@ const Login = () => {
         localStorage.setItem("customer_name", data.output.customer_name);
         alert("User Login Successfully");
         navigate("/dashboard");
-      } else {
-        throw new Error("Invalid response structure");
       }
     } catch (error) {
       console.log("Error in login:", error);
