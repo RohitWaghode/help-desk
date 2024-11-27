@@ -43,6 +43,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.log("error", error.response?.data?.message || error.message);
+      alert("Error: " + (error.response?.data?.message || error.message));
     }
   };
 
