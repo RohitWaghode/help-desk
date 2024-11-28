@@ -25,13 +25,15 @@ const Signup = () => {
     const adminKey = "@jlfhjlglguGL#";
 
     try {
-      const response = await axios.post(
+      const response = await fetch(
         `${process.env.REACT_APP_BACKEND_BASE_URL}/user/create`,
-        usersData,
         {
+          method: "POST",
           headers: {
+            "Content-Type": "application/json",
             admin_key: adminKey,
           },
+          body: JSON.stringify(usersData),
           credentials: "include",
         }
       );
